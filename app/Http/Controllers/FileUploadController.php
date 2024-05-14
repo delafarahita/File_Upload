@@ -29,6 +29,9 @@ class FileUploadController extends Controller
         //echo "proses upload berhasil, data disimpan pada: $path";
         //echo "<br>";
         echo "Gambar berhasil di upload ke <a href='$pathBaru'>$textname</a>";
+        echo "<br>";
+        echo "<img src='$pathBaru' alt='$textname' style='max-width: 500px'; height: auto;'>";
+
         //echo $request->berkas->getClientOriginalName()." lolos validasi";
         //dump($request->berkas);
         //return "Pemrosesan file upload di sini";
