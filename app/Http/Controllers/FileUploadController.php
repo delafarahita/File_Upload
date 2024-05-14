@@ -12,25 +12,21 @@ class FileUploadController extends Controller
 
     public function prosesFileUpload(Request $request){
         $request->validate([
-            'nama_berkas' => 'required|string',
             'berkas' => 'required|file|image|max:500',
         ]);
         //$path = $request->berkas->store('uploads');
-        $ext = $request->berkas->getClientOriginalExtension();
-        $textname = $request->nama_berkas.'.'.$ext;
-        //$namaFile = 'web-'.time().'.'.$textfile;
+        $extfile = $request->berkas->getClientOriginalName();
+        $namaFile = 'web-'.time().'.'.$extfile;
         //$namaFile = $textfile;
 
-        $path = $request->berkas->move('gambar',$textname);
+        $path = $request->berkas->move('gambar',$namaFile);
         $path = str_replace("\\","//",$path);
-        //echo "Variabel path berisi: $path <br>";
+        echo "Variabel path berisi: $path <br>";
 
-        $pathBaru = asset('gambar/'.$textname);
-        //echo "proses upload berhasil, data disimpan pada: $path";
-        //echo "<br>";
-        echo "Gambar berhasil di upload ke <a href='$pathBaru'>$textname</a>";
+        $pathBaru = asset('gambar/'.$namaFile);
+        echo "proses upload berhasil, data disimpan pada: $path";
         echo "<br>";
-        echo "<img src='$pathBaru' alt='$textname' style='max-width: 500px'; height: auto;'>";
+        echo "Tampilkan link: <a href='$pathBaru'>$pathBaru</a>";
 
         //echo $request->berkas->getClientOriginalName()." lolos validasi";
         //dump($request->berkas);
